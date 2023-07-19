@@ -37,7 +37,7 @@ def sign_up():
         hashed_password = generate_password_hash((form.password.data), method='sha256')
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user)
-        db.session.commit
+        db.session.commit()
         flash('Your account has been created! You can now log in', 'success')
         return redirect(url_for('auth.login'))
     return render_template('signup.html', form=form, user=current_user)
