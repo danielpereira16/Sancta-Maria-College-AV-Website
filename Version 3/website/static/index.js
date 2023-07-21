@@ -14,3 +14,7 @@ function like(postId) {
       })
       .catch((e) => alert("Could not like post."));
   }
+
+new SimpleLightbox({
+  elements: '#portfolio a.portfolio-box'
+});
