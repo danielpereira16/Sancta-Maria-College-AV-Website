@@ -12,6 +12,11 @@ def home():
     posts = Post.query.all()
     return render_template("home.html", user=current_user, posts=posts)
 
+@views.route("/contact-us")
+def contact_us():
+    posts = Post.query.all()
+    return render_template("contact_us.html", user=current_user, posts=posts)
+
 @views.route("/blog")
 @login_required
 def blog():
