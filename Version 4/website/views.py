@@ -47,7 +47,7 @@ def delete_post(id):
     post = Post.query.filter_by(id=id).first()
     if not post:
         flash("Post does not exist.", category='error')
-    elif current_user.id != post.id:
+    elif post.author != current_user.id:
         flash('You do not have permission to delete this post.', category='error')
     else:
         db.session.delete(post)
@@ -82,7 +82,7 @@ def create_comment(post_id):
             db.session.commit()
         else:
             flash('Post does not exist.', category='error')
-    return redirect(url_for('views.home'))
+    return redirect(url_for('views.blog'))
 
 
 @views.route("/delete-comment/<comment_id>")
@@ -96,7 +96,7 @@ def delete_comment(comment_id):
     else:
         db.session.delete(comment)
         db.session.commit()
-    return redirect(url_for('views.home'))
+    return redirect(url_for('views.blog'))
 
 
 @views.route("/like-post/<post_id>", methods=['POST'])

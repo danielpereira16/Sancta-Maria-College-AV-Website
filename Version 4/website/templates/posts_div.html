@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
-<div class="container-area">
+<div class="container">
 <h1 align="center">{% block header %}Posts{% endblock %}</h1>
     <div id="posts">
       {% for post in posts %}
@@ -53,25 +53,25 @@
                     >: {{comment.text}}
                   </div>
                   <div>
-                    <small class="text-muted"> {{comment.date_created}}</small>
                     {% if user.id == comment.author or user.id == post.author %}
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-primary dropdown-toggle"
-                        data-bs-toggle="dropdown"
-                      ></button>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <a
-                            href="/delete-comment/{{comment.id}}"
-                            class="dropdown-item"
-                            >Delete</a
-                          >
-                        </li>
-                      </ul>
-                    </div>
+                      <div class="btn-group-comment">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-primary dropdown-toggle"
+                          data-bs-toggle="dropdown"
+                        ></button>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a
+                              href="/delete-comment/{{comment.id}}"
+                              class="dropdown-item"
+                              >Delete</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
                     {% endif %}
+                    <small class="text-muted"> {{comment.date_created}}</small>
                   </div>
                 </div>
                 {% endfor %}
