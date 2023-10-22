@@ -10461,3 +10461,9 @@ header.masthead h1, header.masthead .h1 {
   display: inline-flex;
   vertical-align: middle;
 }
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin: 16px
+}
