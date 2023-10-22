@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+    <!-- Extending the base HTML template -->
+    {% block title %}Sign Up{% endblock %}
+    <!-- Setting the title of the page within the 'title' block -->
+    {% block content %}
+    <!-- Defining the 'content' block -->
+    <div class="content-section">
+        <!-- Container for the content -->
+        <form method="POST" action="">
+            <!-- Form for user registration, using the POST method -->
+            {{ form.hidden_tag() }}
+            <!-- Hidden tag for CSRF protection -->
+            <fieldset class="form-group">
+                <!-- Fieldset for the form content -->
+                <legend class="border-bottom mb-4">Join Today</legend>
+                <!-- Title for the form section -->
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+                    <!-- Displaying the label for the username field -->
+                    {% if form.username.errors %}
+                    {{ form.username(class="form-control form-control-lg is-invalid") }}
+                    <!-- Displaying the username input field with error styling -->
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                        <!-- Displaying the error messages for username validation -->
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.username(class="form-control form-control-lg") }}
+                    <!-- Displaying the username input field normally -->
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    <!-- Displaying the label for the email field -->
+                    {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    <!-- Displaying the email input field with error styling -->
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                        <!-- Displaying the error messages for email validation -->
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.email(class="form-control form-control-lg") }}
+                    <!-- Displaying the email input field normally -->
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    <!-- Displaying the label for the password field -->
+                    {% if form.password.errors %}
+                    {{ form.password(class="form-control form-control-lg is-invalid") }}
+                    <!-- Displaying the password input field with error styling -->
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                        <!-- Displaying the error messages for password validation -->
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.password(class="form-control form-control-lg") }}
+                    <!-- Displaying the password input field normally -->
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.confirm_password.label(class="form-control-label") }}
+                    <!-- Displaying the label for the password confirmation field -->
+                    {% if form.confirm_password.errors %}
+                    {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                    <!-- Displaying the password confirmation input field with error styling -->
+                    <div class="invalid-feedback">
+                        {% for error in form.confirm_password.errors %}
+                        <span>{{ error }}</span>
+                        <!-- Displaying the error messages for password confirmation validation -->
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.password(class="form-control form-control-lg") }}
+                    <!-- Displaying the password confirmation input field normally -->
+                    {% endif %}
+                </div>
+            </fieldset>
+            <br>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+                <!-- Displaying the submit button for the form -->
+            </div>
+        </form>
+    </div>
+    <!-- Section for login link -->
+    <div class="border-top pt-3">
+        <small class="text-muted">Already have an account?<a class="ml-2" href="{{url_for('auth.login')}}"> Sign In</a></small>
+    </div>
+    {% endblock %}
