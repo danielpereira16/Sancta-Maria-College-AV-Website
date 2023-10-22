@@ -38,10 +38,11 @@
                     <a class="nav-item nav-link active" href="/home">Home</a>
                     <a class="nav-item nav-link active" href="/contact-us">Contact Us</a>
                     {% if user.is_authenticated %}    
-                        <a class="nav-item nav-link active" href="/logout">Logout</a>
+                        <a class="nav-item nav-link active" href="/account">Account</a>
                         <a class="nav-item nav-link active" href="/blog">Blog</a>
                         <a class="nav-item nav-link active" href="/products">Products</a>
                         <a class="nav-item nav-link active" href="/hire">Hire</a>
+                        <a class="nav-item nav-link active" href="/logout">Logout</a>
                         {% else %}
                         <a class="nav-item nav-link active" href="/sign-up">Sign Up</a>
                         <a class="nav-item nav-link active" href="/login">Login</a>
