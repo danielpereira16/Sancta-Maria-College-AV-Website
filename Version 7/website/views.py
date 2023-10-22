@@ -219,6 +219,10 @@ def hire_product():
         return redirect(url_for('views.add-product'))
     return render_template('hiring_page.html', form=form, user=current_user)
 
+@views.route("/add-product")
+def add_product():
+    return render_template("add_product.html", user=current_user)
+
 @views.route("/contact-us")
 def contact_us():
     posts = Post.query.all()
