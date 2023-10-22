@@ -95,3 +95,11 @@ class Hire(db.Model):
     amount = db.Column(db.Integer)
     author = db.Column(db.Integer, db.ForeignKey(
         'user.id', ondelete="CASCADE"), nullable=False)
+
+class ContactUs(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    Name = db.Column(db.String(150))
+    email = db.Column(db.String(150), unique=True)
+    PhoneNumber = db.Column(db.Integer)
+    info = db.Column(db.Text, nullable=False)
+    date_created = db.Column(db.DateTime(timezone=True), default=func.now())

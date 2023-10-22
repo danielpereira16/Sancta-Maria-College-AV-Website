@@ -86,3 +86,10 @@ class HireForm(FlaskForm):
     EventDay = DateTimeLocalField('Please enter date of event', format="%Y-%m-%dT%H:%M")
     amount = StringField('Please enter amount of specified product', validators=[DataRequired()])
     submit = SubmitField('Hire')
+
+class ContactUsForm(FlaskForm):
+    Name = StringField('Please enter your name', validators=[DataRequired()])
+    PhoneNumber = StringField('Please enter your phone number', validators=[DataRequired(), Length(min=8, max=20)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    info = StringField('Please add a message', validators=[DataRequired(), Length(min=10)])
+    submit = SubmitField('Submit')
