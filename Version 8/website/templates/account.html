@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+    <!-- Extending the base HTML template -->
+    {% block title %}Account{% endblock %}
+    <!-- Setting the title of the page within the 'title' block -->
+    {% block content %}
+    <!-- Defining the 'content' block -->
+    <div class="content-section">
+        <!-- Container for the content -->
+        <div class="media">
+            <!-- Media container for displaying user information -->
+            <div class="media-body">
+                <h2 class="account-heading">{{ current_user.username }}</h2>
+                <!-- Displaying the user's username -->
+                <p class="text-secondary">{{ current_user.email }}</p>
+                <!-- Displaying the user's email -->
+            </div>
+        </div>
+        <form method="POST" action="" enctype="multipart/form-data">
+            <!-- Form for updating account information, using the POST method and supporting file uploads -->
+            {{ form.hidden_tag() }}
+            <!-- Hidden tag for CSRF protection -->
+            <fieldset class="form-group">
+                <!-- Fieldset for the form content -->
+                <legend class="border-bottom mb-4">Account Information</legend>
+                <!-- Title for the form section -->
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+                    <!-- Displaying the label for the username field -->
+                    {% if form.username.errors %}
+                    <!-- Checks if there is an error with the username in form -->
+                    {{ form.username(class="form-control form-control-lg is-invalid") }}
+                    <!-- Displaying the username input field with error styling -->
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                        <!-- Displaying the error messages for username validation -->
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.username(class="form-control form-control-lg") }}
+                    <!-- Displaying the username input field normally -->
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    <!-- Displaying the label for the email field -->
+                    {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    <!-- Displaying the email input field with error styling -->
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                        <!-- Displaying the error messages for email validation -->
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.email(class="form-control form-control-lg") }}
+                    <!-- Displaying the email input field normally -->
+                    {% endif %}
+                </div>
+            </fieldset>
+            <br>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+                <!-- Displaying the submit button for the form -->
+            </div>
+        </form>
+    </div>
+    <!-- End of content block -->
+    <br>
+    {% endblock %}

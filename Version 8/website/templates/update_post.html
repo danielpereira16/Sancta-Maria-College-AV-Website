@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+    <!-- Extending the base HTML template -->
+    {% block title %}Update Post{% endblock %}
+    <!-- Setting the title of the page within the 'title' block -->
+    {% block content %}
+    <!-- Defining the 'content' block -->
+    <div class="content-section">
+        <!-- Container for the content -->
+        <form method="POST" action="">
+            <!-- Form for updating a post, using the POST method -->
+            {{ form.hidden_tag() }}
+            <!-- Hidden tag for CSRF protection -->
+            <fieldset class="form-group">
+                <!-- Fieldset for the form content -->
+                <legend class="border-bottom mb-4">Update post</legend>
+                <!-- Title for the form section -->
+                <div class="form-group">
+                    {{ form.title.label(class="form-control-label") }}
+                    <!-- Displaying the label for the title field -->
+                    {% if form.title.errors %}
+                    {{ form.title(class="form-control form-control-lg is-invalid") }}
+                    <!-- Displaying the title input field with error styling -->
+                    <div class="invalid-feedback">
+                        {% for error in form.title.errors %}
+                        <span>{{ error }}</span>
+                        <!-- Displaying the error messages for title validation -->
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.title(class="form-control form-control-lg") }}
+                    <!-- Displaying the title input field normally -->
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.text.label(class="form-control-label") }}
+                    <!-- Displaying the label for the text field -->
+                    {% if form.text.errors %}
+                    {{ form.text(class="form-control form-control-lg is-invalid") }}
+                    <!-- Displaying the text input field with error styling -->
+                    <div class="invalid-feedback">
+                        {% for error in form.text.errors %}
+                        <span>{{ error }}</span>
+                        <!-- Displaying the error messages for text validation -->
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.text(class="form-control form-control-lg") }}
+                    <!-- Displaying the text input field normally -->
+                    {% endif %}
+                </div>
+            </fieldset>
+            <br>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+                <!-- Displaying the submit button for the form -->
+            </div>
+        </form>
+    </div>
+    <!-- End of content block -->
+    {% endblock %}
