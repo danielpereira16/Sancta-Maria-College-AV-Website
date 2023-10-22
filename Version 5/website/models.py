@@ -5,8 +5,8 @@ from sqlalchemy.sql import func
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(150), unique=True)
-    username = db.Column(db.String(150), unique=True)
+    email = db.Column(db.String(150), nullable=False, unique=True)
+    username = db.Column(db.String(150), nullable=False, unique=True)
     password = db.Column(db.String(150))
     image_file = db.Column(db.String(20), nullable=False, default='default.jpeg')
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())

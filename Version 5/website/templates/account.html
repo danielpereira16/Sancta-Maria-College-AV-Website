@@ -1,20 +1,19 @@
 {% extends "base.html" %}
 {% block title %}Account{% endblock %}
 {% block content %}
-<div class="container">
     <div class="content-section">
     <div class="media">
         <img class="rounded-circle article-img" src="{{ image_file }}">
         <div class="media-body">
             <h2 class="account-heading">{{ current_user.username }}</h2>
-            <p class="test-secondary">{{ current_user.email }}</h2>
+            <p class="text-secondary">{{ current_user.email }}</p>
         </div>
     </div>
         <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
             </br>
-                <h1 align="center">{% block header %}Account Information{% endblock %}</h1>
+                <legend class="border-bottom mb-4">Account Information</legend>
                 <div class="form-group">
                     {{ form.username.label(class="form-control-label") }}
                     {% if form.username.errors %}
@@ -60,5 +59,4 @@
         </div>
         </form>
     </div>
-</div>
 {% endblock %}
