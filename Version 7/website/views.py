@@ -15,7 +15,6 @@ views = Blueprint("views", __name__)  # defines a blueprint for views
 
 @views.route("/")  # creates a route with / as URL path
 @views.route("/home")  # creates a route with /home as URL path
-@login_required  # restricts route from unauthenticated users
 def home():  # defines a function for home
     """Create a route for home.html."""
     posts = Post.query.all()  # queries the databse for all posts
@@ -35,6 +34,9 @@ def blog():  # defines a function for blog
     return render_template("blog.html", user=current_user, posts=posts)
     # renders blog.html page
 
+@views.route("/add_product")
+def add_product():
+    return render_template("add_product.html", user=current_user)
 
 @views.route("/create-post", methods=['GET', 'POST'])
 # creates a route with /create-post as URL path, specifies GET and POST as methods
@@ -216,12 +218,8 @@ def hire_product():
         db.session.add(hire)
         db.session.commit()
         flash('Hire Products Complete', category='success')
-        return redirect(url_for('views.add-product'))
+        return redirect(url_for('views.add_product'))
     return render_template('hiring_page.html', form=form, user=current_user)
-
-@views.route("/add-product")
-def add_product():
-    return render_template("add_product.html", user=current_user)
 
 @views.route("/contact-us")
 def contact_us():
