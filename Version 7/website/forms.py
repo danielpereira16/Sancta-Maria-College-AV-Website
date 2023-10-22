@@ -2,7 +2,7 @@
 from flask_wtf import FlaskForm  # imports FlaskForm from flask_wtf library
 from flask_wtf.file import FileField, FileAllowed  # imports FileField and FileAllowed from flask_wtf.file
 from flask_login import current_user  # imports current_user from flask_login
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, SelectField, DateTimeLocalField
 from wtforms import SubmitField, TextAreaField, EmailField
 # imports different fields from wtforms
 from wtforms.validators import DataRequired, Length, Email
@@ -79,3 +79,10 @@ class PostForm (FlaskForm):  # defines class as PostForm that inherits form Flas
     # defines form field as text and specifies validators
     submit = SubmitField('Create Post')
     # defines submit button
+
+class HireForm(FlaskForm):
+    EventName = StringField('Please enter the event name', validators=[DataRequired()])
+    text = SelectField(u'Please enter product name', choices = ['Speaker', 'Mic'], validators=[DataRequired()])
+    EventDay = DateTimeLocalField('Please enter date of event', format="%Y-%m-%dT%H:%M")
+    amount = StringField('Please enter amount of specified product', validators=[DataRequired()])
+    submit = SubmitField('Hire')

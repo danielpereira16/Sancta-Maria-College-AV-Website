@@ -85,3 +85,13 @@ class Like(db.Model):  # defines class as Like that inherits from db.Model
         'post.id', ondelete="CASCADE"), nullable=False)
     # defines post_id as a database column specifies it as an integer that cannot be empty
     # specifies the foreign key as post.id, if user is deleted cascade deletion will occur
+
+class Hire(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.ForeignKey('user.email', ondelete="CASCADE"), nullable=False)
+    EventName = db.Column(db.Text, nullable=False)
+    EventDay = db.Column(db.String, nullable=False)
+    text = db.Column(db.Text, nullable=False)
+    amount = db.Column(db.Integer)
+    author = db.Column(db.Integer, db.ForeignKey(
+        'user.id', ondelete="CASCADE"), nullable=False)
