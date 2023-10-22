@@ -4,6 +4,8 @@
     <!-- Setting the title of the page within the 'title' block -->
     {% block content %}
     <!-- Defining the 'content' block -->
+    <div class="container">
+        <!--overall container for information-->  
     <div class="content-section">
         <!-- Container for the content -->
         <form method="POST" action="">
@@ -12,7 +14,7 @@
             <!-- Hidden tag for CSRF protection -->
             <fieldset class="form-group">
                 <!-- Fieldset for the form content -->
-                <legend class="border-bottom mb-4">Create a post</legend>
+                <h1 align="center">{% block header %}Create a Post{% endblock %}</h1>
                 <!-- Title for the form section -->
                 <div class="form-group">
                     {{ form.title.label(class="form-control-label") }}
@@ -52,10 +54,13 @@
                 </div>
             </fieldset>
             <br>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
-                <!-- Displaying the submit button for the form -->
+            <div align="center">
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-primary btn-xl") }}
+                    <!-- Displaying the submit button for the form -->
+                </div>
             </div>
         </form>
+    </div>
     </div>
     {% endblock %}

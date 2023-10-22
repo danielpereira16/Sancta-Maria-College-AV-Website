@@ -1,17 +1,20 @@
 {% extends "base.html" %}
-    <!-- Extending the base HTML template -->
-    {% block title %}Account{% endblock %}
-    <!-- Setting the title of the page within the 'title' block -->
-    {% block content %}
+<!-- Extending the base HTML template -->
+{% block title %}Account{% endblock %}
+<!-- Setting the title of the page within the 'title' block -->
+{% block content %}
+<div class="container">
+<!--overall container for information-->       
     <!-- Defining the 'content' block -->
     <div class="content-section">
         <!-- Container for the content -->
         <div class="media">
             <!-- Media container for displaying user information -->
             <div class="media-body">
-                <h2 class="account-heading">{{ current_user.username }}</h2>
+                <br>
+                <h2 class="account-heading text-center">{{ current_user.username }}</h2>
                 <!-- Displaying the user's username -->
-                <p class="text-secondary">{{ current_user.email }}</p>
+                <p class="text-secondary text-center">{{ current_user.email }}</p>
                 <!-- Displaying the user's email -->
             </div>
         </div>
@@ -21,7 +24,7 @@
             <!-- Hidden tag for CSRF protection -->
             <fieldset class="form-group">
                 <!-- Fieldset for the form content -->
-                <legend class="border-bottom mb-4">Account Information</legend>
+                <legend>Account Information</legend>
                 <!-- Title for the form section -->
                 <div class="form-group">
                     {{ form.username.label(class="form-control-label") }}
@@ -61,12 +64,14 @@
                 </div>
             </fieldset>
             <br>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
-                <!-- Displaying the submit button for the form -->
+            <div align="center">
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-primary btn-xl") }}
+                </div>
             </div>
         </form>
     </div>
     <!-- End of content block -->
     <br>
-    {% endblock %}
+</div> 
+{% endblock %}

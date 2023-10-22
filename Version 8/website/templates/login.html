@@ -1,7 +1,10 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %} {% block content%}
 <!-- Extends the base.html template with Login as the title -->
+<div class="container">
+<!--overall container for information-->  
     <form method="POST">
-      <h3>Login</h3>
+      <br>
+      <h1 align="center">{% block header %}Login{% endblock %}</h1>
       <div class="form-group">
         <label for="email" >Email Address</label>
         <input
@@ -21,9 +24,9 @@
         />
         <br />
         <div align="center">
-          <button class="btn btn-primary" type="submit">Login</button>
+          <button class="btn btn-primary btn-xl" type="submit">Login</button>
         </div>
       </div>
     </form>
-
-    {% endblock %}
+</div>
+{% endblock %}

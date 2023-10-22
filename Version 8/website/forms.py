@@ -91,5 +91,5 @@ class ContactUsForm(FlaskForm):
     Name = StringField('Please enter your name', validators=[DataRequired()])
     PhoneNumber = StringField('Please enter your phone number', validators=[DataRequired(), Length(min=8, max=20)])
     email = StringField('Email', validators=[DataRequired(), Email()])
-    info = StringField('Please add a message', validators=[DataRequired(), Length(min=10)])
+    info = TextAreaField('Please add a message', validators=[DataRequired(), Length(min=10)])
     submit = SubmitField('Submit')
