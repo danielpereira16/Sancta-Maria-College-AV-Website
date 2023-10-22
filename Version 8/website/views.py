@@ -4,9 +4,9 @@ from flask import flash, redirect, url_for, jsonify, abort
 # imports several features from flask library
 from flask_login import login_required, current_user
 # imports login_required and current_user from flask_login library
-from .models import Post, User, Comment, Like, Hire
+from .models import Post, User, Comment, Like, Hire, ContactUs
 # imports Post, User, Comment, Like from models folder
-from .forms import UpdateAccountForm, PostForm, HireForm
+from .forms import UpdateAccountForm, PostForm, HireForm, ContactUsForm
 # imports UpdateAccountForm, PostForm and ContactForm from forms folder
 from . import db  # imports db from directory
 
@@ -225,3 +225,14 @@ def hire_product():
 def contact_us():
     posts = Post.query.all()
     return render_template("contact_us.html", user=current_user, posts=posts)
+
+@views.route("/contact-us",  methods=['GET', 'POST'])
+def contact_us():
+    form = ContactUsForm()
+    if form.validate_on_submit():
+        contactus = ContactUs(Name=form.Name.data, PhoneNumber=form.PhoneNumber.data, email=form.email.data, info=form.info.data)
+        db.session.add(contactus)
+        db.session.commit()
+        flash('Thanks for your message, we will be in touch shortly', category='success')
+        return redirect(url_for('views.home'))
+    return render_template('contact_us.html', form=form, user=current_user)
