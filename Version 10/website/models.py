@@ -87,19 +87,41 @@ class Like(db.Model):  # defines class as Like that inherits from db.Model
     # specifies the foreign key as post.id, if user is deleted cascade deletion will occur
 
 class Hire(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.ForeignKey('user.email', ondelete="CASCADE"), nullable=False)
-    EventName = db.Column(db.Text, nullable=False)
-    EventDay = db.Column(db.String, nullable=False)
-    text = db.Column(db.Text, nullable=False)
-    amount = db.Column(db.Integer)
-    author = db.Column(db.Integer, db.ForeignKey(
-        'user.id', ondelete="CASCADE"), nullable=False)
+    # Define the 'Hire' model for hiring products
+    id = db.Column(db.Integer, primary_key=True)  
+    # defines id as a database column and specifies it as an integer that is unique
+    email = db.Column(db.ForeignKey('user.email', ondelete="CASCADE"), nullable=False)  
+    # defines email as a database column, specifies it must not be empty and specifies 
+    # the foreign key as user.email, if user is deleted, cascade deletion will occur.
+    EventName = db.Column(db.Text, nullable=False)  
+    # defines eventname as a database column and specifies the field is text which 
+    # cannot be blank
+    EventDay = db.Column(db.String, nullable=False)  
+    # defines eventname as a database column and specifies the field is a string which 
+    # cannot be blank
+    text = db.Column(db.Text, nullable=False)  
+    # defines text as a database column and specifies the field is text which 
+    # cannot be blank
+    amount = db.Column(db.Integer)  
+    # defines amount as a database column and specifies the field is an integer which 
+    # cannot be blank
+    author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)  
+    # Author of the hire (foreign key)
 
 class ContactUs(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    Name = db.Column(db.String(150))
-    email = db.Column(db.String(150), unique=True)
-    PhoneNumber = db.Column(db.Integer)
-    info = db.Column(db.Text, nullable=False)
-    date_created = db.Column(db.DateTime(timezone=True), default=func.now())
+    # Define the 'ContactUs' model for user inquiries
+    id = db.Column(db.Integer, primary_key=True)  
+    # defines id as a database column and specifies it as an integer that is unique
+    Name = db.Column(db.String(150))  
+    # defines name as a database column and specifiecs its length as a string
+    email = db.Column(db.String(150), unique=True)  
+    # defines email of the person making the as a database column. specifies 
+    # the input with a string which is unique
+    PhoneNumber = db.Column(db.Integer)  
+    # defines the Phone number of the person making the inquiry as a database
+    # column and specifies it must be an integer
+    info = db.Column(db.Text, nullable=False)  
+    # defines the info of the message as a database column and specifies it
+    # as a text field which must be answered
+    date_created = db.Column(db.DateTime(timezone=True), default=func.now())  
+    # defines date_created as a database column that shows the date and time that a post is created

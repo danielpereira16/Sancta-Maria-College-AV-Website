@@ -19,7 +19,8 @@
             </div>
         </div>
         <form method="POST" action="" enctype="multipart/form-data">
-            <!-- Form for updating account information, using the POST method and supporting file uploads -->
+            <!-- Form for updating account information, using the POST 
+                method and supporting file uploads -->
             {{ form.hidden_tag() }}
             <!-- Hidden tag for CSRF protection -->
             <fieldset class="form-group">
@@ -68,6 +69,7 @@
                 <div class="form-group">
                     {{ form.submit(class="btn btn-primary btn-xl") }}
                 </div>
+                <!-- Displaying the submit button in the center form -->
             </div>
         </form>
     </div>

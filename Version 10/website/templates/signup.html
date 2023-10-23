@@ -93,7 +93,7 @@
                 <div align="center">
                     <div class="form-group">
                         {{ form.submit(class="btn btn-primary btn-xl") }}
-                        <!-- Displaying the submit button for the form -->
+                        <!-- Displaying the submit button in the center form -->
                     </div>
                 </div>
             </form>
@@ -101,7 +101,14 @@
         <!-- Section for login link -->
         <br>
         <div align="center">
-            <small class="text-muted">Already have an account?<a class="ml-2" href="{{url_for('auth.login')}}"> Sign In</a></small>
+            <small class="text-muted">
+                Already have an account?
+                <a class="ml-2" href="{{url_for('auth.login')}}"> 
+                    Sign In
+                </a>
+            </small>
         </div>
+        <!-- displaying a link for those who may have by accidentally click on the sign up page and may
+             not notice the login button in the NavBar and hence will try to find a way to go to login -->
     </div>
     {% endblock %}

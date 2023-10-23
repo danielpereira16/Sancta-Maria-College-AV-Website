@@ -5,9 +5,9 @@ from flask import flash, redirect, url_for, jsonify, abort
 from flask_login import login_required, current_user
 # imports login_required and current_user from flask_login library
 from .models import Post, User, Comment, Like, Hire, ContactUs
-# imports Post, User, Comment, Like from models folder
+# imports Post, User, Comment, Like, Hire, ContactUs from models folder
 from .forms import UpdateAccountForm, PostForm, HireForm, ContactUsForm
-# imports UpdateAccountForm, PostForm and ContactForm from forms folder
+# imports UpdateAccountForm, PostForm, ContactUsForm and HireForm from forms folder
 from . import db  # imports db from directory
 
 views = Blueprint("views", __name__)  # defines a blueprint for views
@@ -212,26 +212,51 @@ def update_post(id):  # defines a function for updating posts
 @views.route("/hire", methods=['GET', 'POST'])
 @login_required
 def hire_product():
+    """Create route and function for hiring products."""
+    # Create a form instance for hiring a product
     form = HireForm()
     if form.validate_on_submit():
-        hire = Hire(text=form.text.data, amount=form.amount.data, EventDay=form.EventDay.data, EventName=form.EventName.data, author=current_user.id, email=current_user.email)
-        db.session.add(hire)
-        db.session.commit()
-        flash('Hire Products Complete', category='success')
-        return redirect(url_for('views.add_product'))
+        # If the form is submitted and valid, create a 'Hire' object and save it to the database
+        hire = Hire(
+            text=form.text.data,
+            amount=form.amount.data,
+            EventDay=form.EventDay.data,
+            EventName=form.EventName.data,
+            author=current_user.id,
+            email=current_user.email
+        )
+        db.session.add(hire)  # Add the hire record to the database
+        db.session.commit()  # Commit the changes
+        flash('Hire Products Complete', category='success')  # Show a success message
+        return redirect(url_for('views.add_product'))  # Redirect to the 'add_product' view
+    # Render the 'hiring_page.html' template with the form and the current user
     return render_template('hiring_page.html', form=form, user=current_user)
+    # renders the hiring page
 
-@views.route("/contact-us",  methods=['GET', 'POST'])
+@views.route("/contact-us", methods=['GET', 'POST'])
 def contact_us():
+    """Create route and function for contact us forms and page."""
+    # Create a form instance for contacting us
     form = ContactUsForm()
     if form.validate_on_submit():
-        contactus = ContactUs(Name=form.Name.data, PhoneNumber=form.PhoneNumber.data, email=form.email.data, info=form.info.data)
-        db.session.add(contactus)
-        db.session.commit()
-        flash('Thanks for your message, we will be in touch shortly', category='success')
-        return redirect(url_for('views.home'))
+        # If the form is submitted and valid, create a 'ContactUs' object and save it to the database
+        contactus = ContactUs(
+            Name=form.Name.data,
+            PhoneNumber=form.PhoneNumber.data,
+            email=form.email.data,
+            info=form.info.data
+        )
+        db.session.add(contactus)  # Add the contactus record to the database
+        db.session.commit()  # Commit the changes
+        flash('Thanks for your message, we will be in touch shortly', category='success')  # Show a success message
+        return redirect(url_for('views.home'))  # Redirect to the 'home' view
+    # Render the 'contact_us.html' template with the form and the current user
     return render_template('contact_us.html', form=form, user=current_user)
+    # renders the contact_us page
 
 @views.route("/products")
 def products():
+    """Create route and function for accessing products page."""
+    # Render the 'products.html' template with the current user
     return render_template("products.html", user=current_user)
+    # renders the products page

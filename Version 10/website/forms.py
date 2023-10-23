@@ -81,28 +81,48 @@ class PostForm (FlaskForm):  # defines class as PostForm that inherits form Flas
     # defines submit button
 
 class HireForm(FlaskForm):
-    EventName = StringField('Please enter the event name', validators=[DataRequired()])
-    text = SelectField(u'Please enter product name, click onto input area to get options', choices = ['dB Technologies KL 15 Active Speaker', 
-                                                                'JBL EON ONE PRO All-In-One, Rechargeable, PA System', 
-                                                                'Wharfedale EVP-X15PM 400w 15" Powered Foldback Wedge', 
-                                                                'Sennheiser EW100G4-865 Handheld Wireless Mic with E865 Capsule', 
-                                                                'Sennheiser ew100G4-ME2 Wireless Lapel Kit',
-                                                                'Road case of 4xSennheiser wireless microphones',
-                                                                'The Sennheiser A2003UHF Wide-Band Directional Antenna',
-                                                                'Rode M5 Compact 1/2" Condenser Microphone (Matched Pair)', 
-                                                                'D5 Professional dynamic supercardioid vocal microphone', 
-                                                                'Soundcraft Si Expression 1', 'XLR Cable Small = 3m', 
-                                                                'XLR Cable Medium = 6m', 'XLR Cable Large = 6m',
-                                                                'Mic Stand Small', 'Mic Stand Medium', 'Mic Stand Large', 
-                                                                'Panasonic PT-LW330 LCD Projector', 'Sancta Maria College Auditorium System'
-                                                                ], validators=[DataRequired()])
-    EventDay = DateTimeLocalField('Please enter date of event', format="%Y-%m-%dT%H:%M")
-    amount = StringField('Please enter amount of specified product', validators=[DataRequired()])
-    submit = SubmitField('Hire')
+    EventName = StringField('Please enter the event name', 
+                            validators=[DataRequired()])
+    # Field for the event name
+    text = SelectField(u'Please enter product name, click onto input area to get options',
+                       # Dropdown field for selecting a product from a list of options 
+                       choices = ['dB Technologies KL 15 Active Speaker', 
+                                    'JBL EON ONE PRO All-In-One, Rechargeable, PA System', 
+                                    'Wharfedale EVP-X15PM 400w 15" Powered Foldback Wedge', 
+                                    'Sennheiser EW100G4-865 Handheld Wireless Mic with E865 Capsule', 
+                                    'Sennheiser ew100G4-ME2 Wireless Lapel Kit',
+                                    'Road case of 4xSennheiser wireless microphones',
+                                    'The Sennheiser A2003UHF Wide-Band Directional Antenna',
+                                    'Rode M5 Compact 1/2" Condenser Microphone (Matched Pair)', 
+                                    'D5 Professional dynamic supercardioid vocal microphone', 
+                                    'Soundcraft Si Expression 1', 'XLR Cable Small = 3m', 
+                                    'XLR Cable Medium = 6m', 'XLR Cable Large = 6m',
+                                    'Mic Stand Small', 'Mic Stand Medium', 'Mic Stand Large', 
+                                    'Panasonic PT-LW330 LCD Projector', 'Sancta Maria College Auditorium System'
+                                    ], validators=[DataRequired()])
+    EventDay = DateTimeLocalField('Please enter date of event', 
+                                  format="%Y-%m-%dT%H:%M")  
+    # Field for event date
+    amount = StringField('Please enter amount of specified product', 
+                         validators=[DataRequired()]) 
+     # Field for the product quantity
+    submit = SubmitField('Hire')  
+    # Submit button
 
 class ContactUsForm(FlaskForm):
-    Name = StringField('Please enter your name', validators=[DataRequired()])
-    PhoneNumber = StringField('Please enter your phone number', validators=[DataRequired(), Length(min=8, max=20)])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    info = TextAreaField('Please add a message', validators=[DataRequired(), Length(min=10)])
-    submit = SubmitField('Submit')
+    # Form for contacting the organization
+    Name = StringField('Please enter your name', 
+                       validators=[DataRequired()])  
+    # Field for the user's name
+    PhoneNumber = StringField('Please enter your phone number', 
+                              validators=[DataRequired(), 
+                                          Length(min=8, max=20)])  
+    # Field for the user's phone number
+    email = StringField('Email', validators=[DataRequired(), 
+                                             Email()])  
+    # Field for the user's email
+    info = TextAreaField('Please add a message', 
+                         validators=[DataRequired(), 
+                                     Length(min=10)])  
+    # Field for the user's message
+    submit = SubmitField('Submit')  # Submit button

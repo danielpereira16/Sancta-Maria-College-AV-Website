@@ -1,20 +1,29 @@
 {% extends "base.html" %}
+<!-- Extending the base HTML template -->
 {% block title %}Add another Product{% endblock %}
+<!-- Setting the title of the page within the 'title' block -->
 {% block content %}
-<h1 align="center">Add Another Product?</h1>
-<br/>
+<!-- Defining the 'content' block -->
+<br>
 <div class="container">
+<!-- overall container for content -->
+    <h1 align="center">Add Another Product?</h1>
+    <!-- Title for the complete page -->
+    <br>
     <div align="center">
         <a class="btn btn-primary btn-xl" href="/products">Products Page</a>
     </div>
+    <!-- Displaying the products page button in the center form -->
     </br>
     <div align="center">
         <a class="btn btn-primary btn-xl" href="/hire">Hire Another Product</a>
     </div>
+    <!-- Displaying the hire page button in the center form -->
     </br>
     <div align="center">
         <a class="btn btn-primary btn-xl" href="/home">Home Page</a>
     </div>
+    <!-- Displaying the home page button in the center form -->
     </br>
 </div>
 {% endblock %}
