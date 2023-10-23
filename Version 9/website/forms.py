@@ -82,7 +82,20 @@ class PostForm (FlaskForm):  # defines class as PostForm that inherits form Flas
 
 class HireForm(FlaskForm):
     EventName = StringField('Please enter the event name', validators=[DataRequired()])
-    text = SelectField(u'Please enter product name', choices = ['Speaker', 'Mic'], validators=[DataRequired()])
+    text = SelectField(u'Please enter product name', choices = ['dB Technologies KL 15 Active Speaker', 
+                                                                'JBL EON ONE PRO All-In-One, Rechargeable, PA System', 
+                                                                'Wharfedale EVP-X15PM 400w 15" Powered Foldback Wedge', 
+                                                                'Sennheiser EW100G4-865 Handheld Wireless Mic with E865 Capsule', 
+                                                                'Sennheiser ew100G4-ME2 Wireless Lapel Kit',
+                                                                'Road case of 4xSennheiser wireless microphones',
+                                                                'The Sennheiser A2003UHF Wide-Band Directional Antenna',
+                                                                'Rode M5 Compact 1/2" Condenser Microphone (Matched Pair)', 
+                                                                'D5 Professional dynamic supercardioid vocal microphone', 
+                                                                'Soundcraft Si Expression 1', 'XLR Cable Small = 3m', 
+                                                                'XLR Cable Medium = 6m', 'XLR Cable Large = 6m',
+                                                                'Mic Stand Small', 'Mic Stand Medium', 'Mic Stand Large', 
+                                                                'Panasonic PT-LW330 LCD Projector', 'Sancta Maria College Auditorium System'
+                                                                ], validators=[DataRequired()])
     EventDay = DateTimeLocalField('Please enter date of event', format="%Y-%m-%dT%H:%M")
     amount = StringField('Please enter amount of specified product', validators=[DataRequired()])
     submit = SubmitField('Hire')
