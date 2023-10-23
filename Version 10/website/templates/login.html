@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content%}
+<!-- Extends the base.html template with Login as the title -->
+<div class="container">
+<!--overall container for information-->  
+    <form method="POST">
+      <br>
+      <h1 align="center">{% block header %}Login{% endblock %}</h1>
+      <div class="form-group">
+        <label for="email" >Email Address</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          class="form-control"
+          placeholder="Enter Email"
+        />
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          placeholder="Enter Password"
+        />
+        <br />
+        <div align="center">
+          <button class="btn btn-primary btn-xl" type="submit">Login</button>
+        </div>
+      </div>
+    </form>
+</div>
+{% endblock %}
