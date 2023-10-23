@@ -82,7 +82,7 @@ class PostForm (FlaskForm):  # defines class as PostForm that inherits form Flas
 
 class HireForm(FlaskForm):
     EventName = StringField('Please enter the event name', validators=[DataRequired()])
-    text = SelectField(u'Please enter product name', choices = ['dB Technologies KL 15 Active Speaker', 
+    text = SelectField(u'Please enter product name, click onto input area to get options', choices = ['dB Technologies KL 15 Active Speaker', 
                                                                 'JBL EON ONE PRO All-In-One, Rechargeable, PA System', 
                                                                 'Wharfedale EVP-X15PM 400w 15" Powered Foldback Wedge', 
                                                                 'Sennheiser EW100G4-865 Handheld Wireless Mic with E865 Capsule', 
