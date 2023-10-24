@@ -34,8 +34,12 @@ def blog():  # defines a function for blog
     return render_template("blog.html", user=current_user, posts=posts)
     # renders blog.html page
 
+# Define a route for the "/add_product" URL
 @views.route("/add_product")
 def add_product():
+    """Create a route and function for adding products."""
+    # Render the "add_product.html" template and pass the current user to it
+    # This view is responsible for displaying the "add_product.html" page
     return render_template("add_product.html", user=current_user)
 
 @views.route("/create-post", methods=['GET', 'POST'])
@@ -51,7 +55,7 @@ def create_post():  # defines a function for creating posts
         # confirms title, text and author
         db.session.add(post)  # adds session to the database
         db.session.commit()  # commits the session to the database
-        flash('Post Created!', category='success')  # flashes a success message
+        flash('Question Created!', category='success')  # flashes a success message
         return redirect(url_for('views.blog'))  # brings the user to blog page
 
     return render_template('create_post.html', form=form,  user=current_user)
@@ -65,15 +69,15 @@ def delete_post(id):  # defines a function for deleting posts
     post = Post.query.filter_by(id=id).first()
     # queries Post database for the post id
     if not post:  # creates an if statement
-        flash("Post does not exist.", category='error')  # flashes an error message
+        flash("Question does not exist.", category='error')  # flashes an error message
     elif post.author != current_user.id:  # checks if the post belongs to the user
-        flash('You do not have permission to delete this post.',
+        flash('You do not have permission to delete this question.',
               category='error')
         # flashes an error message
     else:
         db.session.delete(post)  # deletes session from database
         db.session.commit()  # commits session
-        flash('Post deleted.', category='success')  # flashes success message
+        flash('Question deleted.', category='success')  # flashes success message
 
     return redirect(url_for('views.blog'))  # brings user to blog page
 
@@ -91,7 +95,7 @@ def posts(username):  # defines a function for posts
         return redirect(url_for('views.home'))  # brings user to home page
     posts = Post.query.filter_by(user=user)\
         .order_by(Post.date_created.desc())\
-        .paginate(page=page, per_page=5)
+        .paginate(page=page, per_page=4)
     #posts = user.posts  # defines posts as the posts of a user
     return render_template("posts.html",
                            user=current_user, posts=posts, username=username)
@@ -129,7 +133,7 @@ def create_comment(post_id):  # defines a function for creating comments
             db.session.add(comment)  # adds the session into Comment database
             db.session.commit()  # commits the session into the database
         else:
-            flash('Post does not exist.', category='error')  # flahses an error message
+            flash('Question does not exist.', category='error')  # flahses an error message
 
     return redirect(url_for('views.blog'))  # brings user to blog page
 
@@ -144,7 +148,7 @@ def like(post_id):  # defines a function for liking posts
         author=current_user.id, post_id=post_id).first()
     # defines like by first authhor that matches current user id and post id that matches post id
     if not post:
-        return jsonify({'error': 'Post does not exist.'}, 400)
+        return jsonify({'error': 'Question does not exist.'}, 400)
     # shows an error message
     elif like:
         db.session.delete(like)  # deletes like from database
@@ -198,10 +202,10 @@ def update_post(id):  # defines a function for updating posts
         post.title = form.title.data  # makes the title of the post the data that was in the form field
         post.text = form.text.data  # makes the text in the post the data that was in form field
         db.session.commit()  # commits the session into the database
-        flash('Post Updated!', category='success')  # flashes a success message
+        flash('Question Updated!', category='success')  # flashes a success message
         page = request.args.get('page', 1, type=int)  # requests the number of pages as an integer
         posts = Post.query.order_by(Post.date_created.desc()).paginate(page=page, per_page=4)
-        # creates a new page every 5th post and orders them by date/time created
+        # creates a new page every 4th post and orders them by date/time created
         return render_template("blog.html", user=current_user, posts=posts)
     # renders the blog.html page
     elif request.method == 'GET':  # if the request method is GET

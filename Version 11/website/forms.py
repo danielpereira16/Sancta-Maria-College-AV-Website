@@ -76,7 +76,7 @@ class PostForm (FlaskForm):  # defines class as PostForm that inherits form Flas
     # defines form field as title and specifies validators
     text = TextAreaField('Text', validators=[DataRequired()])
     # defines form field as text and specifies validators
-    submit = SubmitField('Create Post')
+    submit = SubmitField('Create Question')
     # defines submit button
 
 class HireForm(FlaskForm):
