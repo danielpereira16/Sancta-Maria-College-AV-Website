@@ -29,4 +29,4 @@ class RegistrationForm(FlaskForm):
 class PostForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     text = TextAreaField('text', validators=[DataRequired()])
-    submit = SubmitField('Create Post')
+    submit = SubmitField('Create Q&A')

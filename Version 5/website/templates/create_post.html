@@ -5,7 +5,7 @@
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
-        <legend class="border-bottom b-4">Create a Post</legend>
+        <legend class="border-bottom b-4">Q&A</legend>
         </br>
             <div class="form-group">
                 {{ form.title.label(class="form-control-label") }}
@@ -41,12 +41,5 @@
         </div>
     </div>
     </form>
-</div>
-
-</br>
-<div align="center">
-    <small class="text-muted">
-        Already have an account?<a class="ml-2" href="{{ url_for('auth.login') }}">Sign in</a>
-    </small>
 </div>
 {% endblock %}
