@@ -82,14 +82,17 @@ def delete_post(id):  # defines a function for deleting posts
 @login_required  # restricts route for unauthorized users
 def posts(username):  # defines a function for posts
     """Create a route for posts belonging to a user."""
+    page = request.args.get('page', 1, type=int)
     user = User.query.filter_by(username=username).first()
     # checks the User database if the username matches
     if not user:
         flash('No user with that username exists.', category='error')
         # flahses an error message
         return redirect(url_for('views.home'))  # brings user to home page
-
-    posts = user.posts  # defines posts as the posts of a user
+    posts = Post.query.filter_by(user=user)\
+        .order_by(Post.date_created.desc())\
+        .paginate(page=page, per_page=4)
+    #posts = user.posts  # defines posts as the posts of a user
     return render_template("posts.html",
                            user=current_user, posts=posts, username=username)
     # renders the posts.html template
