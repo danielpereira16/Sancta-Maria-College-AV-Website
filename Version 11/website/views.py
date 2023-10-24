@@ -267,3 +267,24 @@ def products():
     # Render the 'products.html' template with the current user
     return render_template("products.html", user=current_user)
     # renders the products page
+
+# Define a route for deleting comments with a parameter "comment_id"
+@views.route("/delete-comment/<comment_id>")
+@login_required  # Ensures the user is logged in to access this route
+def delete_comment(comment_id):
+    # Attempt to find the comment in the database using its ID
+    comment = Comment.query.filter_by(id=comment_id).first()
+
+    # Check if the comment exists
+    if not comment:
+        flash('Comment does not exist.', category='error')
+    # Check if the current user is not the author of the comment or the author of the post
+    elif current_user.id != comment.author and current_user.id != comment.post.author:
+        flash('You do not have permission to delete this comment.', category='error')
+    else:
+        # If the comment exists and the user has the necessary permissions, delete the comment
+        db.session.delete(comment)
+        db.session.commit()
+
+    # Redirect to the 'blog' view after the operation is complete
+    return redirect(url_for('views.blog'))
