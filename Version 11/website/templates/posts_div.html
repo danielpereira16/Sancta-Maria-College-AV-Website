@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+    <!-- Extending the base HTML template -->
+    {% block title %}Home{% endblock %}
+    <!-- Setting the title of the page within the 'title' block -->
+    {% block content %}
+    <!-- Defining the 'content' block -->
+    <div class="container">
+        <!-- setting container for page content -->
+        <br>
+        <!-- placing break in page -->
+        <h1 align="center">
+            {% block header %}Q&A Posts{% endblock %}
+            <!-- Displaying the header with a default of "Posts" -->
+        </h1>
+        <div id="posts">
+            <!-- Container for displaying posts -->
+            {% for post in posts %}
+            <!-- Loop through posts -->
+            <div class="card border-dark">
+                <!-- Card for each post -->
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <!-- Card header with post user information -->
+                    <a href="/posts/{{post.user.username}}">
+                        {{post.user.username}}</a>
+                    <!-- Link to the user's posts -->
+                    <div>
+                        <span id="likes-count-{{post.id}}">
+                            {{ post.likes|length }}</span>
+                        <!-- Displaying the number of 
+                            post likes -->
+                        {% if user.id in post.likes|map(attribute="author")|list %}
+                        <!-- Checking if the user has liked the post -->
+                        <i class="fas fa-thumbs-up" id="like-button-{{post.id}}" 
+                        onclick="like({{post.id}})"></i>
+                        <!-- Displaying a thumbs-up icon for liking the post -->
+                        {% else %}
+                        <i class="far fa-thumbs-up" id="like-button-{{post.id}}" 
+                        onclick="like({{post.id}})"></i>
+                        <!-- Displaying an outline thumbs-up icon for not 
+                            liking the post -->
+                        {% endif %}
+                        {% if user.id == post.author %}
+                        <!-- Checking if the user is the author of the post -->
+                        <div class="btn-group">
+                            <!-- Dropdown menu for post author actions -->
+                            <button type="button" class="btn btn-sm btn-primary 
+                            dropdown-toggle" data-bs-toggle="dropdown"></button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/delete-post/{{post.id}}" 
+                                    class="dropdown-item">Delete</a>
+                                    <!-- Link to delete the post -->
+                                </li>
+                                <li>
+                                    <a href="/update-post/{{post.id}}" 
+                                    class="dropdown-item">Update</a>
+                                    <!-- Link to update the post -->
+                                </li>
+                            </ul>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Card body for post content -->
+                    <div class="card-text post-title">{{post.title}}</div>
+                    <!-- Displaying the post title -->
+                    <br />
+                    <div class="card-text">{{post.text}}</div>
+                    <!-- Displaying the post text -->
+                    <br />
+                    <!-- Collapsible section for comments -->
+                    <div class="collapse" id="comments-{{post.id}}">
+                        <div class="card">
+                            <div class="card-body" id="comments-expanded-{{post.id}}">
+                                <!-- Looping through comments for the post -->
+                                {% for comment in post.comments %}
+                                <div class="d-flex justify-content-between 
+                                align-items-center">
+                                    <!-- Displaying each comment -->
+                                    <div>
+                                        <a href="/posts/{{comment.user.username}}">
+                                            {{comment.user.username}}</a>: {{comment.text}}
+                                        <!-- Displaying the comment author and text -->
+                                    </div>
+                                    <div>
+                                        <small class="text-muted">
+                                            {{comment.date_created}}</small>
+                                        <!-- Displaying the comment creation date -->
+                                        {% if user.id == comment.author or user.id == post.author %}
+                                        <!-- Checking if the user is the 
+                                            author of the comment or the post -->
+                                        <div class="btn-group">
+                                            <!-- Dropdown menu for comment author actions -->
+                                            <button type="button" 
+                                            class="btn btn-sm btn-primary dropdown-toggle" 
+                                            data-bs-toggle="dropdown"></button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a href="/delete-comment/{{comment.id}}" 
+                                                    class="dropdown-item">Delete</a>
+                                                    <!-- Link to delete the comment -->
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-text">
+                        <!-- Link to toggle comment visibility -->
+                        {% if post.comments|length > 0 %}
+                        <a data-bs-toggle="collapse" href="#comments-{{post.id}}" 
+                        role="button">
+                            <small>View {{post.comments|length}} Comments</small>
+                        </a>
+                        {% else %}
+                        <small class="text-muted">No Comments</small>
+                        {% endif %}
+                    </p>
+                    <!-- Form for creating a new comment -->
+                    <form class="input-group mb-3" 
+                    method="POST" 
+                    action="/create-comment/{{post.id}}">
+                        <input type="text" id="text" name="text" class="form-control" 
+                        placeholder="Comment something!" />
+                        <button type="submit" class="btn btn-primary">Comment</button>
+                    </form>
+                </div>
+                <!-- Displaying the post creation date -->
+                <div class="card-footer text-muted">{{post.date_created}}</div>
+            </div>
+            <br/>
+            <!-- End of post loop -->
+            {% endfor %}
+        </div>
+        <!-- Pagination links -->
+        {% for page_num in posts.iter_pages
+            (left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        <!-- displays pagination buttons-->
+            {% if page_num %}
+                {% if posts.page == page_num %}
+                    <a class="btn btn-primary mb-4" 
+                    href="{{url_for('views.blog', page=page_num)}}">{{page_num}}</a>
+                    <!--brings user to specified page 
+                        number if button is clicked -->
+                {% else %}
+                    <a class="btn btn-primary mb-4" 
+                    href="{{url_for('views.blog', page=page_num)}}">{{page_num}}</a>
+                    <!--brings user to specified page number if button is clicked -->
+                {% endif %}
+            {% else %}
+                ...
+            {% endif %}
+        {% endfor %}
+        <!-- Footer section -->
+        {% block footer %}
+        <div align="center">
+            <a href="/create-post"><button type="button" 
+                class="btn btn-primary btn-lg">Create a Post</button></a>
+            <!-- Displaying the submit button in the center form -->
+            <br>
+        </div>
+        {% endblock %}
+    </div>
+    <!-- End of content block -->
+    {% endblock %}

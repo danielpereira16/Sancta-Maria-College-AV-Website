@@ -1,0 +1,19 @@
+{% extends "posts_div.html" %}
+<!-- Extending the base HTML template --> 
+{% block title %}{{username}}'s Posts{% endblock%} 
+<!-- Setting the title of the page within the 'title' block -->
+{% block header %} {{username}}'s posts {% endblock %} 
+<!-- setting header for the html page content -->
+{% block footer %}
+<!-- setting the footer content for the page content -->
+    <div align="center">
+      <a href="/blog"
+        ><button type="button" 
+        class="btn btn-primary btn-lg">Back</button></a
+      >
+    </div>
+    <!-- setting up button to allow person 
+      to go through posts and then press back to go to previous page -->
+      
+{% endblock %}
+<!-- endblock -->

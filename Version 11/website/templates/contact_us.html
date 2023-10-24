@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+<!-- Extending the base HTML template -->
+{% block title %}Contact Us{% endblock %}
+<!-- Setting the title of the page within the 'title' block -->
+{% block content %}
+<!-- Defining the 'content' block -->
+<div class="container">
+<!--overall container for information-->
+    <br>
+    <h1 align="center">{% block header %}Contact Us{% endblock %}</h1>
+    <!-- Title for the page using the block header -->
+    <br>
+</div>
+<div class="map-responsive">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3188.091784849677!2d174.90293757560056!3d-36.95986468572071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d4cf145912667%3A0x15fce08809875293!2sSancta%20Maria%20College!5e0!3m2!1sen!2snz!4v1698010657759!5m2!1sen!2snz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+<!-- using a div class to make the map responsive, calling the class for external CSS page and then using 
+    Iframe to help shape the map and make it responsive -->
+<div class="container">
+<!--overall container for information-->    
+        <br>
+        <div align="center">
+        <!-- align text in the center -->
+                <h2 class="mt-0">Contact Details</h2>
+                <hr class="divider" />
+                <!-- header and divder -->
+                <h4>School Reception</h4>
+                <p class="text-muted mb-5">(09) 274 4081</p>
+                <!-- school reception phone number -->
+                <h4>School Office Hours</h4>
+                <p class="text-muted mb-5">8am to 4pm</p>
+                <!-- school reception hours -->
+                <h4>Physical Address</h4>
+                <p class="text-muted mb-5">319 Te Irirangi Drive, Botany South, Auckland 2016</p>
+                <!-- school address -->
+                <h4>Postal Address</h4>
+                <p class="text-muted mb-5">Sancta Maria College PO Box 64 437, Botany, Auckland 2163</p>
+                <!-- school PO Box -->
+                <h4>Office Email </h4>
+                <p class="text-muted mb-5">admin@sanctamaria.school.nz</p>
+                <!-- school email -->
+                <h4>Audio Visual Teacher in Charge Email</h4>
+                <p class="text-muted mb-5">m.glasse@sanctamaria.school.nz</p>
+                <!-- school teacher email for person in charge -->
+        <br>
+                <h2 class="mt-0">Let's Get In Touch!</h2>
+                <hr class="divider" />
+                <!-- header and divider -->
+                <p class="text-muted mb-5">Ready to start borrowing equipment or getting expert help from us? 
+                    Send us a message and we will get back to you as soon as possible!</p>
+                <!-- small bit of information regarding page -->
+        </div>
+                <form method="POST" action="">
+                    <!-- Form for user registration, using the POST method -->
+                    {{ form.hidden_tag() }}
+                    <!-- Hidden tag for CSRF protection -->
+                    <fieldset class="form-group">
+                    <!-- Fieldset for the form content -->
+                    </br>
+                        <div class="form-group">
+                            {{ form.Name.label(class="form-control-label") }}
+                            <!-- Displaying the label for the Name field -->
+                            {% if form.Name.errors %}
+                                {{ form.Name(class="form-control form-control-lg is-invalid") }}
+                                <!-- Displaying the Name input field with error styling -->
+                                <div class="invalid-feedback">
+                                    {% for error in form.Name.errors %}
+                                        <span>{{ error }}</span>
+                                        <!-- Displaying the error messages for Name validation -->
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.Name(class="form-control form-control-lg") }}
+                                <!-- Displaying the Name input field normally -->
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.PhoneNumber.label(class="form-control-label") }}
+                            <!-- Displaying the label for the PhoneNumber field -->
+                            {% if form.PhoneNumber.errors %}
+                                {{ form.PhoneNumber(class="form-control form-control-lg is-invalid") }}
+                                <!-- Displaying the PhoneNumber input field with error styling -->
+                                <div class="invalid-feedback">
+                                    {% for error in form.PhoneNumber.errors %}
+                                        <span>{{ error }}</span>
+                                        <!-- Displaying the error messages for PhoneNumber validation -->
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.PhoneNumber(class="form-control form-control-lg") }}
+                                <!-- Displaying the PhoneNumber input field normally -->
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.email.label(class="form-control-label") }}
+                            <!-- Displaying the label for the email field -->
+                            {% if form.email.errors %}
+                                {{ form.email(class="form-control form-control-lg is-invalid") }}
+                                <!-- Displaying the email input field with error styling -->
+                                <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                        <span>{{ error }}</span>
+                                        <!-- Displaying the error messages for email validation -->
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.email(class="form-control form-control-lg") }}
+                                <!-- Displaying the email input field normally -->
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.info.label(class="form-control-label") }}
+                            <!-- Displaying the label for the info field -->
+                            {% if form.info.errors %}
+                                {{ form.info(class="form-control form-control-lg is-invalid") }}
+                                <!-- Displaying the info input field with error styling -->
+                                <div class="invalid-feedback">
+                                    {% for error in form.info.errors %}
+                                        <span>{{ error }}</span>
+                                        <!-- Displaying the error messages for info validation -->
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.info(class="form-control form-control-lg") }}
+                                <!-- Displaying the info input field normally -->
+                            {% endif %}
+                        </div>
+                        <br>
+                        <div align="center">
+                            <div class="form-group">
+                                {{ form.submit(class="btn btn-primary btn-xl") }}
+                            </div>
+                        </div>
+                        <!-- Displaying the submit button in the center form -->
+                        <br>
+                        <br>
+                        <br>
+                </form>   
+            </div>
+        </div>
+</body>
+{% endblock %}
+
+

@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content%}
+<!-- Extends the base.html template with Login as the title -->
+<div class="container">
+<!--overall container for information-->  
+    <form method="POST">
+    <!-- getting the form to post this information to a database -->
+      <br>
+      <!-- adding break into page -->
+      <h1 align="center">{% block header %}Login{% endblock %}</h1>
+      <!-- Title for the form section -->
+      <div class="form-group">
+        <!-- creating div class for the form group -->
+        <label for="email" >Email Address</label>
+        <!-- adding label in for the input -->
+        <input
+          type="text"
+          id="email"
+          name="email"
+          class="form-control"
+          placeholder="Enter Email"
+        />
+        <!-- input for the password with the id, name, class and place holder-->
+        <label for="password">Password</label>
+        <!-- adding label in for the input -->
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          placeholder="Enter Password"
+        />
+        <!-- input for the password with the id, name, class and place holder-->
+        <br />
+        <div align="center">
+          <button class="btn btn-primary btn-xl" type="submit">Login</button>
+          <!-- Displaying the submit button in the center form -->
+        </div>
+      </div>
+    </form>
+</div>
+{% endblock %}

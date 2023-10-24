@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+<!-- Extending the base HTML template -->
+{% block title %}Hiring Page{% endblock %}
+<!-- Setting the title of the page within the 'title' block -->
+{% block content %}
+<!-- Defining the 'content' block -->
+<div class="container">
+<!--overall container for information-->
+    <form method="POST" action="">
+    <!-- Form for user registration, using the POST method -->
+        {{ form.hidden_tag() }}
+        <!-- Hidden tag for CSRF protection -->
+        <fieldset class="form-group">
+        <!-- Fieldset for the form content -->
+        </br>
+            <h1 align="center">{% block header %}Hire Product Today{% endblock %}</h1>
+            <!-- Title for the form section -->
+            <div class="form-group">
+                {{ form.EventName.label(class="form-control-label") }}
+                <!-- Displaying the label for the EventName field -->
+                {% if form.EventName.errors %}
+                    {{ form.EventName(class="form-control form-control-lg is-invalid") }}
+                    <!-- Displaying the EventName input field with error styling -->
+                    <div class="invalid-feedback">
+                        {% for error in form.EventName.errors %}
+                            <span>{{ error }}</span>
+                            <!-- Displaying the error messages for EventName validation -->
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.EventName(class="form-control form-control-lg") }}
+                    <!-- Displaying the EventName input field normally -->
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.EventDay.label(class="form-control-label", type="datetime-local") }}
+                <!-- Displaying the label for the EventDay field -->
+                {% if form.EventDay.errors %}
+                    {{ form.EventDay(class="form-control form-control-lg is-invalid") }}
+                    <!-- Displaying the EventDay input field with error styling -->
+                    <div class="invalid-feedback">
+                        {% for error in form.EventDay.errors %}
+                            <span>{{ error }}</span>
+                            <!-- Displaying the error messages for EventDay validation -->
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.EventDay(class="form-control form-control-lg") }}
+                    <!-- Displaying the EventDay input field normally -->
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.text.label(class="form-control-label") }}
+                <!-- Displaying the label for the text field -->
+                {% if form.text.errors %}
+                    {{ form.text(class="form-control form-control-lg is-invalid") }}
+                    <!-- Displaying the text input field with error styling -->
+                    <div class="invalid-feedback">
+                        {% for error in form.text.errors %}
+                            <span>{{ error }}</span>
+                            <!-- Displaying the error messages for text validation -->
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.text(class="form-control form-control-lg") }}
+                    <!-- Displaying the text input field normally -->
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.amount.label(class="form-control-label") }}
+                <!-- Displaying the label for the amount field -->
+                {% if form.amount.errors %}
+                    {{ form.amount(class="form-control form-control-lg is-invalid") }}
+                    <!-- Displaying the amount input field with error styling -->
+                    <div class="invalid-feedback">
+                        {% for error in form.amount.errors %}
+                            <span>{{ error }}</span>
+                            <!-- Displaying the error messages for amount validation -->
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.amount(class="form-control form-control-lg") }}
+                    <!-- Displaying the amount input field normally -->
+                {% endif %}
+            </div>
+            <br/>
+            <div align="center">
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-primary btn-xl") }}
+                    <!-- Displaying the submit button in the center form -->
+                </div>
+            </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+    <!-- Extending the base HTML template -->
+    {% block title %}Home{% endblock %}
+    <!-- Setting the title of the page within the 'title' block -->
+    {% block content %}
+    <!-- Defining the 'content' block -->
+    <div class="container">
+        <!--overall container for information-->  
+    <div class="content-section">
+        <!-- Container for the content -->
+        <form method="POST" action="">
+            <!-- Form for creating a post, using the POST method -->
+            {{ form.hidden_tag() }}
+            <!-- Hidden tag for CSRF protection -->
+            <fieldset class="form-group">
+                <!-- Fieldset for the form content -->
+                <h1 align="center">{% block header %}Create a Question{% endblock %}</h1>
+                <!-- Title for the form section -->
+                <div class="form-group">
+                    {{ form.title.label(class="form-control-label") }}
+                    <!-- Displaying the label for the title field -->
+                    {% if form.title.errors %}
+                    <!-- Checking if there are errors in the title field -->
+                    {{ form.title(class="form-control form-control-lg is-invalid") }}
+                    <!-- Displaying the title input field with error styling -->
+                    <div class="invalid-feedback">
+                        {% for error in form.title.errors %}
+                        <!-- Looping through title errors if any -->
+                        <span>{{ error }}</span>
+                        <!-- Displaying the error messages for title validation -->
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.title(class="form-control form-control-lg") }}
+                    <!-- Displaying the title input field normally -->
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.text.label(class="form-control-label") }}
+                    <!-- Displaying the label for the text field -->
+                    {% if form.text.errors %}
+                    {{ form.text(class="form-control form-control-lg is-invalid") }}
+                    <!-- Displaying the text input field with error styling -->
+                    <div class="invalid-feedback">
+                        {% for error in form.text.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.text(class="form-control form-control-lg") }}
+                    <!-- Displaying the text input field normally -->
+                    {% endif %}
+                </div>
+            </fieldset>
+            <br>
+            <div align="center">
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-primary btn-xl") }}
+                    <!-- Displaying the submit button in the center form -->
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+    {% endblock %}
